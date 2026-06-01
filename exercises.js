@@ -1,0 +1,47 @@
+// Grammar exercises
+const EXERCISES=[
+  {topic:"Gusta / Gustan",items:[
+    {q:"Me ___ el chocolate.",opts:["gusta","gustan"],ans:0,hint:"singular noun → gusta"},
+    {q:"Me ___ los gatos.",opts:["gusta","gustan"],ans:1,hint:"plural noun → gustan"},
+    {q:"Me ___ vivir en la ciudad.",opts:["gusta","gustan"],ans:0,hint:"verb → always gusta"},
+    {q:"¿Te ___ las películas españolas?",opts:["gusta","gustan"],ans:1,hint:"películas = plural → gustan"},
+    {q:"A nosotros nos ___ la playa.",opts:["gusta","gustan"],ans:0,hint:"la playa = singular → gusta"},
+    {q:"Me ___ los domingos.",opts:["gusta","gustan"],ans:1,hint:"domingos = plural → gustan"},
+    {q:"Me ___ los deportes al aire libre.",opts:["gusta","gustan"],ans:1,hint:"los deportes = plural → gustan"},
+    {q:"¿Sabes si a sus amigos les ___ bailar?",opts:["gusta","gustan"],ans:0,hint:"bailar = verb → gusta"},
+  ]},
+  {topic:"El / La / Los / Las",items:[
+    {q:"___ ventana",opts:["el","la"],ans:1,hint:"-a ending → feminine → la"},
+    {q:"___ gato",opts:["el","la"],ans:0,hint:"-o ending → masculine → el"},
+    {q:"___ libro",opts:["el","la"],ans:0,hint:"-o ending → masculine → el"},
+    {q:"___ casa",opts:["el","la"],ans:1,hint:"-a ending → feminine → la"},
+    {q:"___ zapato",opts:["el","la"],ans:0,hint:"-o ending → masculine → el"},
+    {q:"___ manzana",opts:["el","la"],ans:1,hint:"-a ending → feminine → la"},
+    {q:"___ chicos (plural)",opts:["el","los"],ans:1,hint:"masculine plural → los"},
+    {q:"___ flores (plural)",opts:["la","las"],ans:1,hint:"feminine plural → las"},
+  ]},
+  {topic:"Voy a / Quiero / Tengo que",items:[
+    {q:"Mañana ___ ir al gimnasio. (planned)",opts:["voy a","quiero","tengo que"],ans:0,hint:"planned future = voy a"},
+    {q:"___ descansar. (I want)",opts:["Voy a","Quiero","Tengo que"],ans:1,hint:"desire = quiero"},
+    {q:"___ limpiar. (I have to)",opts:["Voy a","Quiero","Tengo que"],ans:2,hint:"obligation = tengo que"},
+    {q:"___ viajar a España. (I want)",opts:["Voy a","Quiero","Tengo que"],ans:1,hint:"desire = quiero"},
+    {q:"El sábado ___ cocinar. (planned)",opts:["voy a","quiero","tengo que"],ans:0,hint:"planned = voy a"},
+    {q:"___ ir al supermercado. (we have to)",opts:["Vamos a","Queremos","Tenemos que"],ans:2,hint:"obligation (we) = tenemos que"},
+  ]},
+  {topic:"Ser / Estar / Hay",items:[
+    {q:"Yo ___ irlandesa. (permanent identity)",opts:["soy","estoy","hay"],ans:0,hint:"permanent identity → ser → soy"},
+    {q:"Las llaves ___ encima de la mesa.",opts:["son","están","hay"],ans:1,hint:"location → estar → están"},
+    {q:"___ un restaurante cerca. (existence)",opts:["Es","Está","Hay"],ans:2,hint:"existence → hay"},
+    {q:"¿Cómo ___ hoy? (temporary state)",opts:["eres","estás","hay"],ans:1,hint:"temporary state → estar → estás"},
+    {q:"Mi jefe siempre ___ serio.",opts:["es","está","hay"],ans:1,hint:"temporary/changeable state → estar"},
+    {q:"___ muchos gatos en el parque.",opts:["Son","Están","Hay"],ans:2,hint:"existence of things → hay"},
+  ]},
+  {topic:"Pretérito perfecto",items:[
+    {q:"He ___ la casa. (limpiar)",opts:["limpiado","limpiando","limpié","limpió"],ans:0,hint:"-AR verbs → -ado: limpiado"},
+    {q:"¿Qué ___ hecho? (tú)",opts:["he","has","ha","han"],ans:1,hint:"tú → has"},
+    {q:"Ella ___ comido en un restaurante.",opts:["ha","he","has","han"],ans:0,hint:"ella → ha"},
+    {q:"Nosotros ___ visto una película.",opts:["hemos","habéis","han","he"],ans:0,hint:"nosotros → hemos"},
+    {q:"¿Has estado en España ___ vez?",opts:["alguna","ninguna","cada","otra"],ans:0,hint:"alguna vez = ever"},
+    {q:"He ___ (ir — irregular)",opts:["ido","voy","ir","va"],ans:0,hint:"ir → ido (irregular)"},
+  ]},
+];

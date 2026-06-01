@@ -1,0 +1,3 @@
+// Clase 23 — 12.05.26
+const clase_23 = {date:"12.05.26",topic:"DELE A1 — first exam practice",tags:["DELE","A1","examen oficial"],grammar:"First full DELE A1 practice exam. Sections: listening (audio), reading, grammar & vocabulary, writing. This is the official CEFR certification exam for beginners.",vocab:[["El DELE","DELE certificate"],["El nivel A1","Level A1"],["La certificación","The certification"],["El audio","The audio"],["La transcripción","The transcript"],["Aprobar","To pass"],["El resultado","The result"]],phrases:[["Hemos hecho vuestra primera prueba de DELE, nivel A1.","We did your first DELE A1 practice exam."],["¡Enhorabuena!","Congratulations!"],["¿Has aprobado?","Did you pass?"],["¡Muy bien hecho!","Very well done!"]]},
+];
