@@ -38,7 +38,7 @@ function showClass(i){
     ${c.extra || ''}`;
   // Run any class-specific init after innerHTML is set
   const initEl = document.querySelector('[data-init]');
-  if(initEl){const key=initEl.getAttribute('data-init');if(key==='clase2')initClase2();if(key==='clase3')initClase3();if(key==='clase4')initClase4();if(key==='clase5')initClase5();if(key==='clase10')initClase10();}
+  if(initEl){const key=initEl.getAttribute('data-init');if(key==='clase2')initClase2();if(key==='clase3')initClase3();if(key==='clase4')initClase4();if(key==='clase5')initClase5();if(key==='clase10')initClase10();if(key==='clase11')initClase11();}
 }
 
 function initClase2(){
@@ -86,6 +86,73 @@ function initClase2(){
     d.style.cssText="margin-bottom:8px;font-size:13px";
     d.innerHTML='<div style="color:var(--text2);margin-bottom:4px"><strong>'+(i+1)+'.</strong> ¿Qué vas a hacer '+q+'?</div><input type="text" placeholder="Voy a / Quiero / Tengo que + verb..." style="width:100%;padding:7px 10px;border-radius:8px;border:0.5px solid var(--border2);background:var(--bg);color:var(--text);font-size:13px">';
     ex3el.appendChild(d);
+  });
+}
+
+function chk11A(btn){
+  const chosen=btn.getAttribute('data-opt');
+  const ans=btn.getAttribute('data-ans');
+  const row=btn.parentElement;
+  row.querySelectorAll('button').forEach(b=>b.disabled=true);
+  const fb=row.querySelector('.gg-fb');
+  if(chosen===ans){
+    btn.style.cssText+=';background:var(--green-light);color:var(--green-dark);border-color:var(--green);font-weight:700';
+    if(fb){fb.textContent='✓ Correct!';fb.style.color='var(--green-dark)';}
+  } else {
+    btn.style.cssText+=';background:#FAECE7;color:#993C1D;border-color:#993C1D';
+    if(fb){fb.textContent='✗ Correct answer: '+ans;fb.style.color='#993C1D';}
+    row.querySelectorAll('button').forEach(b=>{if(b.getAttribute('data-opt')===ans)b.style.cssText+=';background:var(--green-light);color:var(--green-dark);border-color:var(--green);font-weight:700';});
+  }
+}
+
+function initClase11(){
+  // Exercise A — fill gap with voy a + verb
+  const exA=[
+    {q:"1. Cristina tiene 72 años. Ella ___ ayudar a sus hijos.",ans:"va a ayudar",opts:["va a ayudar","voy a ir","voy a hacer","van a ser"]},
+    {q:"2. Nicolás y Hugo no encuentran trabajo. En el nuevo año ___ aprender alemán.",ans:"van a aprender",opts:["van a aprender","voy a aprender","va a aprender","van a hacer"]},
+    {q:"3. En el nuevo año ___ ser mejor persona, más amable.",ans:"voy a intentar ser",opts:["voy a intentar ser","va a intentar ser","voy a hacer","voy a ser mejor"]},
+    {q:"4. Andrea y yo ___ ir a la biblioteca todas las tardes.",ans:"vamos a ir",opts:["vamos a ir","voy a ir","van a ir","va a ir"]},
+    {q:"5. Alejandro el año que viene ___ viajar durante dos meses.",ans:"va a viajar",opts:["va a viajar","voy a viajar","van a viajar","va a hacer"]},
+    {q:"6. Héctor y Paula ___ hacer ejercicio: quieren ir a correr.",ans:"van a hacer",opts:["van a hacer","va a hacer","voy a hacer","van a ir"]},
+  ];
+  const elA=document.getElementById('ex11-a');
+  if(!elA)return;
+  exA.forEach((item,i)=>{
+    const d=document.createElement('div');
+    d.style.cssText='background:var(--bg2);border-radius:var(--radius);padding:0.85rem 1.1rem;margin-bottom:8px;border:1.5px solid var(--border)';
+    const btnHtml=item.opts.map(o=>{
+      return '<button data-opt="'+o+'" data-ans="'+item.ans+'" onclick="chk11A(this)" style="padding:8px 14px;border-radius:20px;border:1.5px solid var(--border2);background:var(--bg);color:var(--text);font-size:14px;cursor:pointer">'+o+'</button>';
+    }).join('');
+    d.innerHTML='<div style="font-size:16px;margin-bottom:8px;color:var(--text)">'+item.q+'</div>'
+      +'<div style="display:flex;flex-wrap:wrap;gap:6px">'+btnHtml
+      +'<span class="gg-fb" style="font-size:13px;color:var(--text3);margin-top:4px;width:100%"></span></div>';
+    elA.appendChild(d);
+  });
+
+  // Exercise B — unscramble questions
+  const exB=[
+    {words:["vas","ir","cuándo","a"],ans:"¿Cuándo vas a ir?"},
+    {words:["terminar","cuándo","a","la carrera","vas"],ans:"¿Cuándo vas a terminar la carrera?"},
+    {words:["adónde","a","vas","viajar"],ans:"¿Adónde vas a viajar?"},
+    {words:["a","empezar","cuándo","vas"],ans:"¿Cuándo vas a empezar?"},
+    {words:["a Alemania","a","viajar","vas","cuándo"],ans:"¿Cuándo vas a viajar a Alemania?"},
+    {words:["dónde","inglés","aprender","a","vas"],ans:"¿Dónde vas a aprender inglés?"},
+    {words:["hacer","vas","a","qué"],ans:"¿Qué vas a hacer?"},
+  ];
+  const elB=document.getElementById('ex11-b');
+  if(!elB)return;
+  exB.forEach((item,i)=>{
+    const d=document.createElement('div');
+    d.style.cssText='background:var(--bg2);border-radius:var(--radius);padding:0.85rem 1.1rem;margin-bottom:8px;border:1.5px solid var(--border)';
+    const shuffled=[...item.words].sort(()=>Math.random()-0.5);
+    d.innerHTML='<div style="font-size:14px;color:var(--text3);margin-bottom:6px">'+( i+1)+'. Unscramble:</div>'
+      +'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">'
+      +shuffled.map(w=>'<span style="background:#EEEDFE;color:#3C3489;padding:4px 10px;border-radius:10px;font-size:14px;font-weight:600">'+w+'</span>').join('')
+      +'</div>'
+      +'<div style="font-size:15px;font-weight:700;color:var(--green-dark);display:none" class="unscr-ans">→ '+item.ans+'</div>'
+      +'<button class="show-ans-btn" style="padding:6px 14px;border-radius:16px;border:1.5px solid var(--green);background:var(--green-light);color:var(--green-dark);font-size:13px;font-weight:600;cursor:pointer">Show answer</button>';
+    d.querySelector('.show-ans-btn').onclick=function(){this.previousElementSibling.style.display='block';this.style.display='none';};
+    elB.appendChild(d);
   });
 }
 
