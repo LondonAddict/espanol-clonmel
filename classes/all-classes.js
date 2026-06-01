@@ -1,2 +1,2 @@
-// Initialise global classes array — clase-XX.js files push into this
+// Initialise global CLASSES array
 window.CLASSES = [];
