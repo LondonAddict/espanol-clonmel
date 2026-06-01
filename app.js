@@ -12,7 +12,7 @@ function showPage(p,btn){
 }
 
 function renderClasses(){
-  document.getElementById('classes-grid').innerHTML=CLASSES.map((c,i)=>`
+  document.getElementById('classes-grid').innerHTML=window.CLASSES.map((c,i)=>`
     <div class="class-card" onclick="showClass(${i})">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
         <div class="cc-date">${c.date}</div>
@@ -24,7 +24,7 @@ function renderClasses(){
 }
 
 function showClass(i){
-  const c=CLASSES[i];
+  const c=window.CLASSES[i];
   document.getElementById('class-list-view').style.display='none';
   document.getElementById('class-detail-view').style.display='block';
   document.getElementById('detail-content').innerHTML=`
@@ -330,10 +330,10 @@ function backToList(){
 }
 
 function renderFlashcards(filter){
-  const topics=['All',...new Set(CLASSES.map(c=>c.topic))];
+  const topics=['All',...new Set(window.CLASSES.map(c=>c.topic))];
   document.getElementById('fc-filters').innerHTML=topics.map(t=>`
     <button class="filter-btn${t===filter?' active':''}" onclick="renderFlashcards('${t.replace(/'/g,"\\'")}')">${t==='All'?'All topics':t}</button>`).join('');
-  const items=filter==='All'?ALL_VOCAB:ALL_VOCAB.filter(v=>v.topic===filter);
+  const items=filter==='All'?window.ALL_VOCAB:window.ALL_VOCAB.filter(v=>v.topic===filter);
   document.getElementById('fc-grid').innerHTML=items.map(v=>`
     <div class="vocab-card" onclick="this.classList.toggle('flipped')">
       <div class="v-es">${v.es}</div><div class="v-en">${v.en}</div>
