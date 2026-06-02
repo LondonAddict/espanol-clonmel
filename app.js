@@ -701,7 +701,7 @@ function renderPhrases(){
 
 let quizQs=[],quizIdx=0,quizScore=0;
 function startQuiz(){
-  quizQs=[...QUIZ_POOL].sort(()=>Math.random()-0.5).slice(0,20);
+  quizQs=[...QUIZ_POOL].sort(()=>Math.random()-0.5).slice(0,10);
   quizIdx=0;quizScore=0;
   document.getElementById('quiz-start').style.display='none';
   document.getElementById('quiz-end').style.display='none';
