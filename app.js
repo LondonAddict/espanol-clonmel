@@ -1,5 +1,57 @@
 // Core app logic
 
+// ============================================================
+// HOMETASK — edit this section to update the hometask page
+// To add a new task: add an object to the HOMETASK array below
+// Types: 'video', 'link', 'text'
+// ============================================================
+const HOMETASK = {
+  title: "While Viktoria is on holiday 🌴",
+  intro: "Keep practising your Spanish! Here are two great resources you can use any time:",
+  items: [
+    {
+      type: "video",
+      emoji: "🎬",
+      title: "Extra en Español — YouTube series",
+      desc: "A fun TV series made for Spanish learners. Follow Sam, Ana, Lola and Pablo in Barcelona. Great for listening practice at A1–A2 level.",
+      url: "https://www.youtube.com/playlist?list=PLaSrt2uWkXLXv9YoxI_HmyFyTWdSKxgJq",
+      label: "Watch on YouTube"
+    },
+    {
+      type: "link",
+      emoji: "📰",
+      title: "Spanish in Levels — News in Spanish",
+      desc: "Real news articles rewritten for Spanish learners. Choose Level 1 for A1/A2. New articles almost every day — great for reading practice.",
+      url: "https://spanishinlevels.com/level/nivel-1/",
+      label: "Read news in Spanish"
+    }
+  ]
+};
+// ============================================================
+
+function renderHometask(){
+  const el=document.getElementById('hometask-content');
+  if(!el)return;
+  let html='<div style="background:var(--green-light);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1.75rem;border:1.5px solid var(--green)">'
+    +'<div style="font-size:18px;font-weight:700;color:var(--green-dark);margin-bottom:6px">'+HOMETASK.title+'</div>'
+    +'<div style="font-size:15px;color:var(--green-dark)">'+HOMETASK.intro+'</div>'
+    +'</div>';
+  HOMETASK.items.forEach(item=>{
+    const bg=item.type==='video'?'#1a1a2e':'#E8F5E9';
+    const col=item.type==='video'?'#fff':'#1B5E20';
+    const btnBg=item.type==='video'?'#E53935':'#1D9E75';
+    html+='<div style="background:'+bg+';border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.25rem;border:1.5px solid '+(item.type==='video'?'#333':'#388E3C')+'">'
+      +'<div style="display:flex;align-items:flex-start;gap:14px">'
+      +'<div style="font-size:36px;flex-shrink:0">'+item.emoji+'</div>'
+      +'<div style="flex:1">'
+      +'<div style="font-size:18px;font-weight:700;color:'+col+';margin-bottom:6px">'+item.title+'</div>'
+      +'<div style="font-size:15px;color:'+(item.type==='video'?'#ccc':col)+';margin-bottom:14px;line-height:1.7;opacity:0.9">'+item.desc+'</div>'
+      +'<a href="'+item.url+'" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--radius);background:'+btnBg+';color:#fff;font-size:15px;font-weight:700;text-decoration:none">'+item.label+' →</a>'
+      +'</div></div></div>';
+  });
+  el.innerHTML=html;
+}
+
 function showPage(p,btn){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));
@@ -8,6 +60,7 @@ function showPage(p,btn){
   if(p==='flashcards')renderFlashcards('All');
   if(p==='exercises')renderExercises(0);
   if(p==='phrases')renderPhrases();
+  if(p==='hometask')renderHometask();
   if(p==='classes'){document.getElementById('class-list-view').style.display='';document.getElementById('class-detail-view').style.display='none';}
 }
 
