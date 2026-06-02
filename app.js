@@ -763,22 +763,39 @@ function startQuiz(){
 }
 function showQ(){
   const q=quizQs[quizIdx];
-  document.getElementById('q-counter').textContent=`${quizIdx+1} / ${quizQs.length}`;
-  document.getElementById('q-score').textContent=`Score: ${quizScore}`;
-  document.getElementById('q-bar').style.width=`${Math.round((quizIdx/quizQs.length)*100)}%`;
+  document.getElementById('q-counter').textContent=(quizIdx+1)+' / '+quizQs.length;
+  document.getElementById('q-score').textContent='Score: '+quizScore;
+  document.getElementById('q-bar').style.width=Math.round((quizIdx/quizQs.length)*100)+'%';
   document.getElementById('q-text').textContent=q.q;
-  document.getElementById('q-inst').textContent=q.inst;
+  document.getElementById('q-inst').textContent=q.inst||'';
   document.getElementById('q-feedback').textContent='';
-  document.getElementById('q-next').style.display='none';
-  document.getElementById('q-opts').innerHTML=q.opts.map((o,i)=>`<button class="q-btn" onclick="checkQ(${i})">${o}</button>`).join('');
+  const nextBtn=document.getElementById('q-next');
+  nextBtn.style.display='none';
+  // Use data attributes to avoid quote-escaping issues in onclick
+  const optsEl=document.getElementById('q-opts');
+  optsEl.innerHTML='';
+  q.opts.forEach(function(o,i){
+    const btn=document.createElement('button');
+    btn.className='q-btn';
+    btn.textContent=o;
+    btn.setAttribute('data-idx',i);
+    btn.addEventListener('click',function(){checkQ(parseInt(this.getAttribute('data-idx')));});
+    optsEl.appendChild(btn);
+  });
 }
 function checkQ(chosen){
   const q=quizQs[quizIdx];
   const btns=document.querySelectorAll('.q-btn');
-  btns.forEach(b=>b.disabled=true);
+  btns.forEach(function(b){b.disabled=true;});
   btns[q.ans].classList.add('correct');
-  if(chosen!==q.ans){btns[chosen].classList.add('wrong');document.getElementById('q-feedback').textContent='Correct answer highlighted above.';}
-  else{quizScore++;document.getElementById('q-score').textContent=`Score: ${quizScore}`;document.getElementById('q-feedback').textContent='¡Correcto!';}
+  if(chosen!==q.ans){
+    btns[chosen].classList.add('wrong');
+    document.getElementById('q-feedback').textContent='Correct answer highlighted above.';
+  } else {
+    quizScore++;
+    document.getElementById('q-score').textContent='Score: '+quizScore;
+    document.getElementById('q-feedback').textContent='¡Correcto!';
+  }
   document.getElementById('q-next').style.display='inline-block';
 }
 function nextQ(){
@@ -787,12 +804,11 @@ function nextQ(){
     document.getElementById('quiz-running').style.display='none';
     document.getElementById('quiz-end').style.display='block';
     const pct=quizScore/quizQs.length;
-    document.getElementById('q-final').textContent=`${quizScore} / ${quizQs.length}`;
+    document.getElementById('q-final').textContent=quizScore+' / '+quizQs.length;
     document.getElementById('q-msg').textContent=pct>=0.9?'¡Excelente! Outstanding work!':pct>=0.7?'¡Muy bien! Keep it up!':pct>=0.5?'Good effort — a bit more practice will help!':'Keep going — ¡tú puedes! 💪';
-  }else showQ();
+  }else{
+    showQ();
+  }
 }
 
-renderClasses();
-
-// Boot
 renderClasses();
